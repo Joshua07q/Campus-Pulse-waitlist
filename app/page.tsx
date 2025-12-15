@@ -1,8 +1,12 @@
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
-import AppPreview from "@/components/AppPreview";
+import Categories from "@/components/Categories";
 import Testimonials from "@/components/Testimonials";
+import Organizers from "@/components/Organizers";
+import AppPreview from "@/components/AppPreview";
+import Trust from "@/components/Trust";
+import Rollout from "@/components/Rollout";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
@@ -12,8 +16,12 @@ export default function Home() {
       <Hero />
       <Features />
       <HowItWorks />
-      <AppPreview />
+      <Categories />
       <Testimonials />
+      <Organizers />
+      <AppPreview />
+      <Trust />
+      <Rollout />
       <FAQ />
       <Footer />
     </main>
