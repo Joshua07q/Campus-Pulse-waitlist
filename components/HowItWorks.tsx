@@ -1,30 +1,26 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { UserPlus, Compass, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { MessageCircle, Compass, CheckCircle } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
-
 const steps = [
     {
-        icon: UserPlus,
-        title: "Join with Your University Email",
-        description: "Sign up using your .edu or university email address. We'll verify you're a real student.",
+        icon: MessageCircle,
+        title: "Message Our WhatsApp Bot",
+        description: 'Send "Hi" to our WhatsApp number to get started. Verify with your university email.',
     },
     {
         icon: Compass,
-        title: "Discover & Connect",
-        description: "Browse personalized events, see which friends are going, and join Spark Groups to connect with other attendees.",
+        title: "Discover Events",
+        description: "Browse categories (Parties, Concerts, Academic, Sports) and see who&apos;s going.",
     },
     {
         icon: CheckCircle,
-        title: "RSVP & Experience",
-        description: "One-tap RSVP gets you instant tickets. Never miss out on the experiences that matter.",
+        title: "RSVP in Seconds",
+        description: "One tap to RSVP. Get reminders, check-in codes, and verified attendance proofs.",
     },
 ];
 
@@ -32,6 +28,7 @@ export default function HowItWorks() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
         const ctx = gsap.context(() => {
             const icons = gsap.utils.toArray<HTMLElement>(".step-icon");
 
@@ -57,7 +54,7 @@ export default function HowItWorks() {
     }, []);
 
     return (
-        <section className="py-24 bg-gradient-to-b from-night to-purple/10 text-white relative overflow-hidden">
+        <section id="how-it-works" className="py-24 bg-gradient-to-b from-night to-purple/10 text-white relative overflow-hidden">
             {/* Purple Glow Background */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple/20 blur-[120px] rounded-full pointer-events-none" />
 
@@ -87,7 +84,7 @@ export default function HowItWorks() {
                             transition={{ delay: index * 0.12, type: "spring", stiffness: 120, damping: 20, mass: 0.9 }}
                             className="relative flex flex-col items-center text-center z-10"
                         >
-                            <div className="step-icon w-32 h-32 rounded-full bg-night border-4 border-lavender/20 flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(227,176,255,0.2)]">
+                            <div className="step-icon w-32 h-32 rounded-2xl bg-night border-4 border-lavender/20 flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(227,176,255,0.2)]">
                                 <step.icon className="w-12 h-12 text-lavender" />
                             </div>
                             <h3 className="text-2xl font-bold font-display mb-3">{step.title}</h3>

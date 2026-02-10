@@ -62,7 +62,7 @@ export default function Categories() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl font-display text-white mb-6">Whatever You're Into, We've Got It</h2>
+                    <h2 className="text-4xl md:text-5xl font-display text-white mb-6">Whatever You&apos;re Into, We&apos;ve Got It</h2>
                     <p className="text-white/60 font-inter max-w-2xl mx-auto mb-8">
                         From academic workshops to the biggest campus concerts, find your scene.
                     </p>
@@ -76,9 +76,9 @@ export default function Categories() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.05 }}
-                            className="bg-white/5 border border-white/10 hover:bg-white/10 hover:border-lavender/30 p-6 rounded-2xl transition-all group cursor-default"
+                            className="cp-surface p-6 rounded-xl transition-all group cursor-default"
                         >
-                            <div className="w-10 h-10 rounded-full bg-lavender/10 flex items-center justify-center mb-4 group-hover:bg-lavender/20 transition-colors">
+                            <div className="w-10 h-10 rounded-lg bg-lavender/10 flex items-center justify-center mb-4 group-hover:bg-lavender/20 transition-colors">
                                 <cat.icon className="w-5 h-5 text-lavender" />
                             </div>
                             <h3 className="text-xl font-bold text-white mb-2 font-display">{cat.title}</h3>
@@ -90,8 +90,8 @@ export default function Categories() {
                 </div>
 
                 <div className="mt-12 text-center">
-                    <p className="text-white/40 text-sm font-inter bg-white/5 inline-block px-6 py-3 rounded-full border border-white/5">
-                        <span className="text-lavender font-bold">Smart Filters:</span> Combine categories with date, time, location, price, and who's attending to find exactly what you want.
+                    <p className="text-white/70 text-sm font-inter cp-outline inline-block px-6 py-3 rounded-lg">
+                        <span className="text-lavender font-bold">Smart Filters:</span> Combine categories with date, time, location, price, and who&apos;s attending to find exactly what you want.
                     </p>
                 </div>
             </div>

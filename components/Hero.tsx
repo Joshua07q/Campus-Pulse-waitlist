@@ -1,14 +1,15 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-require-imports, react-hooks/exhaustive-deps */
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Loader2, ChevronDown, ChevronUp, X } from "lucide-react";
 import Logo from "./Logo";
+import WhatsAppIcon from "./WhatsAppIcon";
 import { animate } from "animejs";
 import confetti from 'canvas-confetti';
 import gsap from 'gsap';
-import { useMemo } from 'react';
 
 // Helper to remove bouncing/bobbing from Lottie animations to ensure they stay grounded
 // Extracted outside component to prevent re-creation on every render
@@ -54,13 +55,19 @@ const flattenLottieVerticalMotion = (lottieData: any) => {
             });
         }
         return newData;
-    } catch (e) {
+    } catch {
         return lottieData;
     }
 };
 
 export default function Hero() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const whatsappNumber = "2340000000000"; // TODO: replace with live bot number
+    const whatsappMessage = "Hi CampusPulse";
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    // Keep this SSR-stable to avoid hydration mismatch; we can still open WhatsApp Web on click for desktop.
+    const whatsappHref = whatsappLink;
 
     const Lottie = require("lottie-react").default;
     const ChatBubble = require("./ChatBubble").default;
@@ -89,7 +96,6 @@ export default function Hero() {
     }, []); // Empty dependency array means this runs only once on mount
 
     const [activeBubble, setActiveBubble] = useState<number | null>(null);
-    const [isHovering, setIsHovering] = useState<number | null>(null);
     const confettiIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const confettiCountRef = useRef(0);
 
@@ -120,8 +126,6 @@ export default function Hero() {
     };
 
     const handleMouseEnter = (id: number, ref: React.RefObject<HTMLDivElement | null>) => {
-        setIsHovering(id);
-
         // Excited jump and wild dancing - like someone getting hyped
         if (ref.current) {
             // Big excited jump
@@ -170,12 +174,8 @@ export default function Hero() {
     };
 
     const handleMouseLeave = (ref: React.RefObject<HTMLDivElement | null>) => {
-        setIsHovering(null);
-
         // Calm down and return to normal dancing
         if (ref.current) {
-            const isLeft = ref === leftPersonRef;
-
             // Smooth transition back
             if (ref.current) {
                 animate(ref.current, {
@@ -321,6 +321,20 @@ export default function Hero() {
                 </div>
             </div>
 
+            {/* Floating WhatsApp Icon (icon-only CTA) */}
+            <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-6 right-6 z-50 pointer-events-auto"
+                aria-label="Message CampusPulse on WhatsApp"
+                title="Message on WhatsApp"
+            >
+                <span className="inline-flex w-14 h-14 rounded-[1.15rem] border-2 border-black/70 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.6)] overflow-hidden hover:scale-[1.03] active:scale-[0.99] transition-transform">
+                    <WhatsAppIcon className="w-full h-full" width={56} height={56} />
+                </span>
+            </a>
+
             {/* Background with Purple Night Glow */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -350,10 +364,11 @@ export default function Hero() {
                     className="mb-12"
                 >
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-transparent bg-clip-text bg-gradient-to-r from-white via-lavender to-white drop-shadow-neon leading-tight">
-                        Never Miss<br />the Vibe.
+                        Never Miss the Vibe.
+                        <span className="block">All in Your WhatsApp.</span>
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-lavender/80 font-inter max-w-2xl mx-auto">
-                        Discover every event, see which friends are going, and experience campus life like never before.
+                        Discover every event right in your WhatsApp. See who&apos;s going, RSVP in seconds, and experience campus life like never before.
                     </p>
                 </motion.div>
 
@@ -368,7 +383,7 @@ export default function Hero() {
                         {/* Join Waitlist Button */}
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="px-8 py-4 rounded-full bg-gradient-to-r from-purple to-lavender hover:opacity-90 text-night font-bold text-lg shadow-[0_0_20px_rgba(100,24,189,0.5)] hover:shadow-[0_0_30px_rgba(227,176,255,0.6)] transition-all flex items-center gap-3 group"
+                            className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple to-lavender hover:opacity-90 text-night font-bold text-lg shadow-[0_0_20px_rgba(100,24,189,0.5)] hover:shadow-[0_0_30px_rgba(227,176,255,0.6)] transition-all flex items-center gap-3 group"
                         >
                             Join the Waitlist
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -377,15 +392,24 @@ export default function Hero() {
                         {/* Organizers Button */}
                         <a
                             href="#organizers"
-                            className="px-8 py-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-lg backdrop-blur-sm transition-all flex items-center gap-3 group"
+                            className="px-8 py-4 rounded-lg cp-outline text-white font-bold text-lg backdrop-blur-sm transition-all flex items-center gap-3 group"
                         >
                             Organizers: Get Started
                         </a>
                     </div>
 
-                    <p className="text-white/40 text-sm font-inter mt-4 bg-night/50 px-4 py-2 rounded-full backdrop-blur-md border border-white/5">
-                        Launching March 2025 at University of Ibadan | Coming soon to your campus
-                    </p>
+                    <div className="mt-4 flex flex-col items-center gap-2">
+                        <div className="flex items-center gap-2 text-white/70 text-sm font-inter">
+                            <span className="inline-block w-2.5 h-2.5 rounded-full bg-whatsapp" />
+                            Launching on WhatsApp
+                        </div>
+                        <div className="text-white/55 text-xs font-inter">
+                            Access everything through your favorite messaging app
+                        </div>
+                        <p className="text-white/55 text-sm font-inter cp-outline px-4 py-2 rounded-lg backdrop-blur-md">
+                            Launching March 2026 at University of Ibadan | Coming soon to your campus
+                        </p>
+                    </div>
                 </motion.div>
             </div>
 
@@ -413,7 +437,7 @@ export default function Hero() {
                             }}
                             className="text-4xl"
                         >
-                            🎉
+                            HYPE
                         </motion.div>
                     </div>
                     {/* Animated person */}
@@ -473,7 +497,7 @@ export default function Hero() {
                             }}
                             className="text-4xl"
                         >
-                            🔥
+                            FIRE
                         </motion.div>
                     </div>
                     {/* Animated person */}
@@ -599,7 +623,7 @@ function WaitlistModal({ onClose }: { onClose: () => void }) {
                     damping: 20,
                     duration: 0.6
                 }}
-                className="relative z-10 w-full max-w-lg bg-[#1a0b2e] border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+                className="relative z-10 w-full max-w-lg cp-surface p-6 md:p-8 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
                 style={{ transformStyle: "preserve-3d" }}
             >
                 <button
@@ -668,27 +692,6 @@ function WaitlistModal({ onClose }: { onClose: () => void }) {
                 ) : (
                     <SuccessView onClose={onClose} />
                 )}
-
-                <style jsx global>{`
-            .input-field {
-              width: 100%;
-              padding: 0.75rem 1rem;
-              background: rgba(255, 255, 255, 0.05);
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              border-radius: 0.5rem;
-              color: white;
-              font-family: var(--font-inter);
-              outline: none;
-              transition: all 0.2s;
-            }
-            .input-field:focus {
-              border-color: rgba(227, 176, 255, 0.5);
-              background: rgba(255, 255, 255, 0.1);
-            }
-            .input-field::placeholder {
-              color: rgba(255, 255, 255, 0.4);
-            }
-          `}</style>
             </motion.div>
         </div>
     )
@@ -783,16 +786,16 @@ function SuccessView({ onClose }: { onClose: () => void }) {
             </div>
 
             <h3 className="success-item text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-500 mb-4">
-                You're In! 🚀
+                You&apos;re In!
             </h3>
 
             <p className="success-item text-white/80 text-lg mb-8 max-w-sm mx-auto leading-relaxed">
-                Welcome to the future of campus life. We've reserved your spot on the exclusive list.
+                Welcome to the future of campus life. We&apos;ve reserved your spot on the exclusive list.
             </p>
 
             <button
                 onClick={onClose}
-                className="success-item group relative px-8 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all overflow-hidden"
+                className="success-item group relative px-8 py-3 rounded-lg cp-outline text-white transition-all overflow-hidden"
             >
                 <span className="relative z-10 font-medium">Close</span>
                 {/* Hover shine effect */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, LayoutGrid, Ticket, MessageCircle, Sparkles, GraduationCap } from "lucide-react";
+import { Users, LayoutGrid, MessageCircle, Sparkles, GraduationCap, Clock } from "lucide-react";
 
 const features = [
     {
@@ -13,26 +13,26 @@ const features = [
     {
         icon: LayoutGrid,
         title: "Discover Events Your Way",
-        subtitle: "Every Type of Event",
-        description: "Browse by category: Parties, Concerts, Sports, Shows, Conferences, Academic Events, and more.",
-    },
-    {
-        icon: Ticket,
-        title: "Get Verified Tickets",
-        subtitle: "Fraud-Free Entry",
-        description: "Secure, instant tickets for paid events. No more fake screenshots or payment confusion.",
+        subtitle: "Browse by Category",
+        description: "Browse by category: Parties, Concerts, Academic, Sports, Shows, Conferences, and more.",
     },
     {
         icon: MessageCircle,
-        title: "Spark Groups",
-        subtitle: "Connect Before the Event",
-        description: "Auto WhatsApp groups for attendees. Build the hype, coordinate plans, make friends — all before you arrive.",
+        title: "RSVP in Seconds",
+        subtitle: "All in WhatsApp",
+        description: "RSVP with one tap and get reminders right in WhatsApp. Check-in codes and verified attendance proofs included.",
     },
     {
         icon: Sparkles,
-        title: "AI Recommendations",
-        subtitle: "Events You'll Actually Love",
-        description: "Smart suggestions based on your interests, faculty, past events, and what your friends are attending.",
+        title: "Personalized Discovery",
+        subtitle: "Your Preferences",
+        description: "Browse by category and preferences. Smart AI recommendations coming soon to help you find events you'll love.",
+    },
+    {
+        icon: Clock,
+        title: "Never Miss Updates",
+        subtitle: "Smart Reminders",
+        description: "Get event updates and reminders where you already are, so you show up on time and in the right place.",
     },
     {
         icon: GraduationCap,
@@ -68,19 +68,17 @@ export default function Features() {
                             key={index}
                             initial={{ opacity: 0, y: 24, scale: 0.98, filter: "blur(6px)" }}
                             whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                            whileHover={{ y: -6, scale: 1.02 }}
+                            whileHover={{ y: -6, scale: 1.01 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.08, type: "spring", stiffness: 120, damping: 20, mass: 0.8 }}
-                            className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-lavender/50 hover:bg-white/10 transition-all group"
+                            className="p-8 rounded-xl cp-surface transition-all group"
                         >
-                            <div className="w-12 h-12 rounded-xl bg-purple/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <div className="w-12 h-12 rounded-lg bg-purple/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <feature.icon className="w-6 h-6 text-lavender" />
                             </div>
                             <h4 className="text-lavender font-bold text-sm uppercase tracking-wider mb-2">{feature.subtitle}</h4>
                             <h3 className="text-2xl font-bold text-white mb-3 font-display">{feature.title}</h3>
-                            <p className="text-white/60 font-inter leading-relaxed">
-                                {feature.description}
-                            </p>
+                            <p className="text-white/60 font-inter leading-relaxed">{feature.description}</p>
                         </motion.div>
                     ))}
                 </div>

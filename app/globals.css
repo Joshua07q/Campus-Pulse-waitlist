@@ -1,27 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0f;
+  --foreground: #ededed;
 }
 
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Custom CampusPulse Theme */
   --color-night: #0a0a0f;
   --color-purple: #8b5cf6;
   --color-lavender: #d8b4fe;
-  --font-display: var(--font-geist-sans);
-  --font-inter: var(--font-geist-sans);
+  --color-whatsapp: #25d366;
+  --font-display: var(--font-sans);
+  --font-inter: var(--font-sans);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #0a0a0f;
     --foreground: #ededed;
   }
 }
@@ -29,7 +30,70 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  :root {
+    /* Avoid default browser blues on controls/visited links. */
+    accent-color: rgb(216 180 254);
+  }
+
+  a,
+  a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  /* Shared surfaces to eliminate the default grey/white "cards". */
+  .cp-surface {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(10, 10, 15, 0.62));
+    border: 1px solid rgba(216, 180, 254, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 0 0 1px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(14px);
+  }
+  .cp-surface:hover {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.22), rgba(10, 10, 15, 0.58));
+    border-color: rgba(216, 180, 254, 0.28);
+  }
+
+  .cp-outline {
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.12), rgba(10, 10, 15, 0.45));
+    border: 1px solid rgba(216, 180, 254, 0.18);
+    backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .cp-outline:hover {
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.16), rgba(10, 10, 15, 0.42));
+    border-color: rgba(216, 180, 254, 0.28);
+  }
+
+  .cp-input,
+  .input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.14), rgba(10, 10, 15, 0.50));
+    border: 1px solid rgba(216, 180, 254, 0.22);
+    border-radius: 0.85rem;
+    color: white;
+    font-family: var(--font-inter);
+    outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .cp-input:focus,
+  .input-field:focus {
+    border-color: rgba(227, 176, 255, 0.55);
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.20), rgba(10, 10, 15, 0.46));
+  }
+  .cp-input::placeholder,
+  .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
 }
 
 /* Custom gradient utilities */

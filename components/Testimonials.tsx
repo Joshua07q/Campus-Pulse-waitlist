@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 const testimonials = [
     {
-        quote: "I used to miss so many events because I didn't know they existed. Now I'm literally at everything. CampusPulse is a game-changer.",
+        quote: "I used to miss so many events because I didn't know they existed. Now I just check my WhatsApp and I'm at everything. CampusPulse is a game-changer.",
         author: "Adebayo M.",
         uni: "University of Ibadan, Nigeria",
     },
     {
-        quote: "The Spark Groups feature is genius. I've made more friends through event chats than anywhere else on campus.",
+        quote: "I love how fast it is. I see events, RSVP, and get reminders without jumping between apps.",
         author: "Chioma O.",
         uni: "University of Lagos, Nigeria",
     },
@@ -22,11 +22,6 @@ const testimonials = [
         quote: "Love that it shows me which events my friends are going to. Makes deciding so much easier.",
         author: "Jordan K.",
         uni: "Campus Beta Tester",
-    },
-    {
-        quote: "Love that it shows me which events my friends are going to. Makes deciding so much easier.",
-        author: "Dablixx.",
-        uni: "University of Ibadan, Nigeria",
     },
 ];
 
@@ -50,13 +45,13 @@ export default function Testimonials() {
                             whileHover={{ y: -6, scale: 1.01 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.08, type: "spring", stiffness: 120, damping: 20, mass: 0.9 }}
-                            className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-lavender/30 transition-all relative overflow-hidden group flex flex-col justify-between"
+                            className="p-8 rounded-xl cp-surface hover:ring-1 hover:ring-lavender/20 transition-all relative overflow-hidden group flex flex-col justify-between"
                         >
                             {/* Neon Glow behind card */}
                             <div className="absolute -inset-1 bg-gradient-to-r from-purple via-lavender to-purple opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500" />
 
                             <div className="relative z-10">
-                                <p className="text-lg text-white/90 italic font-inter mb-6 leading-relaxed">"{t.quote}"</p>
+                                <p className="text-[15px] text-white/90 italic font-inter mb-6 leading-relaxed break-words">{t.quote}</p>
                                 <div>
                                     <div className="font-bold text-lavender font-display tracking-wide">{t.author}</div>
                                     <div className="text-xs text-white/50 font-inter mt-1">{t.uni}</div>

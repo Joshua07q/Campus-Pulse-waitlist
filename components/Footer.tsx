@@ -2,10 +2,18 @@
 
 import Logo from "./Logo";
 import { Mail, ArrowRight } from "lucide-react";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 export default function Footer() {
+    const miniNav = [
+        { label: "Features", href: "#features" },
+        { label: "How It Works", href: "#how-it-works" },
+        { label: "Organizers", href: "#organizers" },
+        { label: "FAQ", href: "#faq" },
+    ];
+
     return (
-        <footer className="py-12 bg-night border-t border-white/5">
+        <footer className="py-14 bg-night border-t border-lavender/10">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     {/* Brand Column */}
@@ -19,10 +27,14 @@ export default function Footer() {
                         <p className="text-white/50 text-sm font-inter mb-6">
                             The heartbeat of campus life.
                         </p>
+                        <div className="flex items-center gap-2 text-xs text-white/55 font-inter mb-6">
+                            <WhatsAppIcon className="w-4 h-4" width={16} height={16} />
+                            <span>Phase 1 launches on WhatsApp</span>
+                        </div>
                         <div className="flex gap-4">
                             {/* Social Icons (Placeholders) */}
                             {['Instagram', 'Twitter/X', 'TikTok', 'LinkedIn'].map((social, i) => (
-                                <a key={i} href="#" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/50 hover:bg-lavender hover:text-night transition-all">
+                                <a key={i} href="#" className="w-9 h-9 rounded-lg cp-outline flex items-center justify-center text-white/60 transition-all">
                                     <span className="sr-only">{social}</span>
                                     <div className="w-4 h-4 bg-current rounded-sm" />
                                 </a>
@@ -30,16 +42,27 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Links Column */}
+                    {/* Mini Nav */}
                     <div>
-                        <h4 className="text-white font-bold mb-4 font-display">Links</h4>
-                        <ul className="space-y-2 text-sm text-white/50 font-inter">
-                            <li><a href="mailto:hello@campuspulse.ng?subject=About%20CampusPulse" className="hover:text-lavender transition-colors">About Us</a></li>
-                            <li><a href="#organizers" className="hover:text-lavender transition-colors">For Organizers</a></li>
-                            <li><a href="mailto:hello@campuspulse.ng?subject=Privacy%20Policy%20Inquiry" className="hover:text-lavender transition-colors">Privacy Policy</a></li>
-                            <li><a href="mailto:hello@campuspulse.ng?subject=Terms%20of%20Service%20Inquiry" className="hover:text-lavender transition-colors">Terms of Service</a></li>
-                            <li><a href="mailto:hello@campuspulse.ng?subject=Press%20Kit%20Request" className="hover:text-lavender transition-colors">Press Kit</a></li>
-                        </ul>
+                        <h4 className="text-white font-bold mb-4 font-display">Explore</h4>
+                        <div className="flex flex-wrap gap-2 mb-6">
+                            {miniNav.map((l) => (
+                                <a
+                                    key={l.href}
+                                    href={l.href}
+                                    className="px-4 py-2.5 rounded-xl bg-night/60 border border-lavender/10 text-[15px] text-white/75 font-inter transition-colors hover:bg-night/70 hover:border-lavender/25 hover:text-white no-underline"
+                                >
+                                    {l.label}
+                                </a>
+                            ))}
+                        </div>
+
+                        <div className="text-xs text-white/40 font-inter mb-2 uppercase tracking-wider">Legal</div>
+                        <div className="flex flex-col gap-2 text-sm text-white/55 font-inter">
+                            <a href="mailto:hello@campuspulse.ng?subject=Privacy%20Policy%20Inquiry" className="hover:text-lavender transition-colors">Privacy Policy</a>
+                            <a href="mailto:hello@campuspulse.ng?subject=Terms%20of%20Service%20Inquiry" className="hover:text-lavender transition-colors">Terms of Service</a>
+                            <a href="mailto:hello@campuspulse.ng?subject=Press%20Kit%20Request" className="hover:text-lavender transition-colors">Press Kit</a>
+                        </div>
                     </div>
 
                     {/* Contact Column */}
@@ -73,24 +96,33 @@ export default function Footer() {
                                 const email = (e.target as HTMLFormElement).email.value;
                                 window.location.href = `mailto:hello@campuspulse.ng?subject=Newsletter%20Signup&body=Please%20add%20${email}%20to%20the%20newsletter`;
                             }}
-                            className="flex gap-2"
+                            className="flex flex-col sm:flex-row gap-3"
                         >
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Email address"
-                                required
-                                className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-lavender/50 w-full"
-                            />
-                            <button type="submit" className="bg-lavender text-night rounded-lg px-3 py-2 hover:opacity-90 transition-opacity">
+                            <div className="flex-1 rounded-2xl p-[1px] bg-gradient-to-r from-lavender/25 via-purple/20 to-whatsapp/20">
+                                <div className="flex items-center gap-2 bg-[#07070c]/70 border border-lavender/15 rounded-2xl px-3 py-2 backdrop-blur-md">
+                                    <Mail className="w-4 h-4 text-white/40" />
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email address"
+                                        required
+                                        className="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none font-inter"
+                                    />
+                                </div>
+                            </div>
+                            <button
+                                type="submit"
+                                className="rounded-2xl bg-lavender text-night px-4 py-2 font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                            >
+                                Notify me
                                 <ArrowRight className="w-4 h-4" />
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-white/5 text-center text-white/30 text-xs font-inter">
-                    &copy; {new Date().getFullYear()} CampusPulse. All rights reserved.
+                <div className="pt-8 border-t border-lavender/10 text-center text-white/30 text-xs font-inter">
+                    &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> CampusPulse. All rights reserved.
                 </div>
             </div>
         </footer>

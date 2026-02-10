@@ -36,9 +36,9 @@ export default function Organizers() {
                                 "Create events in minutes (4-step form)",
                                 "Automatic promotion to interested students",
                                 "Real-time RSVP tracking & analytics",
-                                "Verified ticketing with fraud protection",
-                                "Spark Groups auto-created for your attendees",
-                                "Free for most events (low commission on paid tickets)"
+                                "WhatsApp-first reminders and updates for attendees",
+                                "Cryptographically verified attendance proofs",
+                                "Coming soon: Spark Groups + paid events (Q3 2026)"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-3 text-white/80 font-inter">
                                     <div className="min-w-[24px] h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5">
@@ -52,14 +52,14 @@ export default function Organizers() {
                         <div className="flex flex-col sm:flex-row gap-4">
                             <a
                                 href="mailto:organizers@campuspulse.ng?subject=Schedule%20a%20Demo%20-%20CampusPulse"
-                                className="px-8 py-4 rounded-full bg-white text-night font-bold text-lg hover:bg-lavender transition-colors flex items-center justify-center gap-2"
+                                className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple to-lavender text-night font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2"
                             >
                                 Schedule a Demo
                                 <ArrowRight className="w-5 h-5" />
                             </a>
                             <a
                                 href="#organizers"
-                                className="px-8 py-4 rounded-full border border-white/20 text-white font-bold text-lg hover:bg-white/5 transition-colors text-center"
+                                className="px-8 py-4 rounded-lg cp-outline text-white font-bold text-lg transition-colors text-center"
                             >
                                 Learn More
                             </a>
@@ -75,10 +75,10 @@ export default function Organizers() {
                         className="lg:w-1/2 relative"
                     >
                         {/* Card Stack Effect */}
-                        <div className="relative z-10 bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md md:backdrop-blur-xl">
+                        <div className="relative z-10 cp-surface rounded-xl p-8 backdrop-blur-md md:backdrop-blur-xl">
                             <div className="flex justify-between items-start mb-6">
                                 <div>
-                                    <h3 className="text-2xl font-bold text-white mb-1">Neon Night 2025</h3>
+                                    <h3 className="text-2xl font-bold text-white mb-1">Neon Night 2026</h3>
                                     <p className="text-white/50 text-sm">Hosted by Student Union</p>
                                 </div>
                                 <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase">
@@ -87,24 +87,24 @@ export default function Organizers() {
                             </div>
 
                             <div className="grid grid-cols-2 gap-4 mb-8">
-                                <div className="bg-night/50 p-4 rounded-xl">
+                                <div className="bg-night/50 p-4 rounded-xl border border-lavender/10">
                                     <div className="text-3xl font-bold text-lavender mb-1">1,240</div>
                                     <div className="text-xs text-white/50 uppercase">Views</div>
                                 </div>
-                                <div className="bg-night/50 p-4 rounded-xl">
+                                <div className="bg-night/50 p-4 rounded-xl border border-lavender/10">
                                     <div className="text-3xl font-bold text-green-400 mb-1">856</div>
                                     <div className="text-xs text-white/50 uppercase">RSVPs</div>
                                 </div>
                             </div>
 
-                            <div className="h-40 bg-white/5 rounded-xl flex items-center justify-center border border-dashed border-white/20">
-                                <p className="text-white/30 text-sm">Real-time Analytics Graph</p>
+                            <div className="h-40 bg-night/40 rounded-xl flex items-center justify-center border border-dashed border-lavender/15">
+                                <p className="text-white/40 text-sm">Real-time analytics preview</p>
                             </div>
                         </div>
 
                         {/* Decoration behind card */}
-                        <div className="absolute top-10 -right-4 w-full h-full bg-lavender/5 rounded-3xl -z-10 rotate-3" />
-                        <div className="absolute top-20 -right-8 w-full h-full bg-purple/10 rounded-3xl -z-20 rotate-6" />
+                        <div className="absolute top-10 -right-4 w-full h-full bg-lavender/5 rounded-xl -z-10 rotate-3" />
+                        <div className="absolute top-20 -right-8 w-full h-full bg-purple/10 rounded-xl -z-20 rotate-6" />
                     </motion.div>
                 </div>
             </div>
