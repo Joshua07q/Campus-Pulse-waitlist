@@ -2,25 +2,25 @@
 
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle, Compass, CheckCircle } from "lucide-react";
+import { Smartphone, Zap, PartyPopper } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const steps = [
     {
-        icon: MessageCircle,
-        title: "Message Our WhatsApp Bot",
-        description: 'Send "Hi" to our WhatsApp number to get started. Verify with your university email.',
+        icon: Smartphone,
+        title: "Request Beta Access",
+        description: "Join 500+ UI students who are first in line. Get your friends on board and move up the waitlist.",
     },
     {
-        icon: Compass,
-        title: "Discover Events",
-        description: "Browse categories (Parties, Concerts, Academic, Sports) and see who&apos;s going.",
+        icon: Zap,
+        title: "Get WhatsApp Invite (Early March)",
+        description: "We'll message you the moment CampusPulse goes live.",
     },
     {
-        icon: CheckCircle,
-        title: "RSVP in Seconds",
-        description: "One tap to RSVP. Get reminders, check-in codes, and verified attendance proofs.",
+        icon: PartyPopper,
+        title: "Discover, RSVP, Pull Up",
+        description: "Never miss the vibe again.",
     },
 ];
 

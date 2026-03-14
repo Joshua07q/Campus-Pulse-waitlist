@@ -62,7 +62,7 @@ export default function Categories() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl font-display text-white mb-6">Whatever You&apos;re Into, We&apos;ve Got It</h2>
+                    <h2 className="text-4xl md:text-5xl font-display text-white mb-6">Whatever You're Into, We've Got It</h2>
                     <p className="text-white/60 font-inter max-w-2xl mx-auto mb-8">
                         From academic workshops to the biggest campus concerts, find your scene.
                     </p>
@@ -89,11 +89,6 @@ export default function Categories() {
                     ))}
                 </div>
 
-                <div className="mt-12 text-center">
-                    <p className="text-white/70 text-sm font-inter cp-outline inline-block px-6 py-3 rounded-lg">
-                        <span className="text-lavender font-bold">Smart Filters:</span> Combine categories with date, time, location, price, and who&apos;s attending to find exactly what you want.
-                    </p>
-                </div>
             </div>
         </section>
     );

@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   BatteryFull,
@@ -16,6 +15,7 @@ import {
   Wifi,
 } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
+import Logo from "./Logo";
 
 const WALLPAPER_SVG = `
 <svg xmlns="http://www.w3.org/2000/svg" width="360" height="640" viewBox="0 0 360 640">
@@ -127,9 +127,6 @@ export default function AppPreview() {
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-white mb-6">Looks and feels like WhatsApp</h2>
-          <p className="text-xl text-white/65 font-inter max-w-2xl mx-auto">
-            Discover events, RSVP, and get reminders directly in WhatsApp. Full mobile app + AI features follow in Q2 2026.
-          </p>
         </div>
 
         <div className="relative flex justify-center items-center">
@@ -163,7 +160,7 @@ export default function AppPreview() {
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <div className="w-9 h-9 rounded-full bg-black/25 border border-lavender/15 flex items-center justify-center overflow-hidden">
-                  <Image src="/whatsapp.png" alt="WhatsApp" width={28} height={28} className="object-contain" />
+                  <Logo className="w-6 h-6 text-lavender" />
                 </div>
                 <div className="flex-1 min-w-0 text-left leading-tight">
                   <div className="text-white font-bold text-sm truncate">CampusPulse Bot</div>

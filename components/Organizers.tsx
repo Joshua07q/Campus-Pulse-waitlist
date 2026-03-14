@@ -1,10 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Check, CalendarRange, ArrowRight } from "lucide-react";
+import Logo from "./Logo";
+import OrganizerDemoModal from "./OrganizerDemoModal";
 
 export default function Organizers() {
+    const statuses = [
+        { label: "Coming Soon", className: "bg-yellow-500/20 text-yellow-300" },
+        { label: "Live", className: "bg-green-500/20 text-green-400" },
+        { label: "Completed", className: "bg-blue-500/20 text-blue-300" },
+    ] as const;
+    const [statusIndex, setStatusIndex] = useState(0);
+    const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setStatusIndex((prev) => (prev + 1) % statuses.length);
+        }, 2200);
+
+        return () => clearInterval(interval);
+    }, [statuses.length]);
+
+    const currentStatus = statuses[statusIndex];
+
     return (
+        <>
         <section id="organizers" className="py-24 bg-gradient-to-br from-[#1a0b2e] to-night relative overflow-hidden">
             {/* Background Decoration */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple/20 blur-[100px] rounded-full pointer-events-none" />
@@ -37,7 +59,7 @@ export default function Organizers() {
                                 "Automatic promotion to interested students",
                                 "Real-time RSVP tracking & analytics",
                                 "WhatsApp-first reminders and updates for attendees",
-                                "Cryptographically verified attendance proofs",
+                                "Verified attendance proofs",
                                 "Coming soon: Spark Groups + paid events (Q3 2026)"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-3 text-white/80 font-inter">
@@ -50,13 +72,14 @@ export default function Organizers() {
                         </ul>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <a
-                                href="mailto:organizers@campuspulse.ng?subject=Schedule%20a%20Demo%20-%20CampusPulse"
+                            <button
+                                type="button"
+                                onClick={() => setIsDemoModalOpen(true)}
                                 className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple to-lavender text-night font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2"
                             >
                                 Schedule a Demo
                                 <ArrowRight className="w-5 h-5" />
-                            </a>
+                            </button>
                             <a
                                 href="#organizers"
                                 className="px-8 py-4 rounded-lg cp-outline text-white font-bold text-lg transition-colors text-center"
@@ -81,8 +104,8 @@ export default function Organizers() {
                                     <h3 className="text-2xl font-bold text-white mb-1">Neon Night 2026</h3>
                                     <p className="text-white/50 text-sm">Hosted by Student Union</p>
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase">
-                                    Live
+                                <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase transition-colors ${currentStatus.className}`}>
+                                    {currentStatus.label}
                                 </span>
                             </div>
 
@@ -98,7 +121,10 @@ export default function Organizers() {
                             </div>
 
                             <div className="h-40 bg-night/40 rounded-xl flex items-center justify-center border border-dashed border-lavender/15">
-                                <p className="text-white/40 text-sm">Real-time analytics preview</p>
+                                <div className="flex flex-col items-center">
+                                    <Logo className="w-12 h-12 text-lavender mb-3" />
+                                    <p className="text-white/50 text-sm">CampusPulse Demo Dashboard</p>
+                                </div>
                             </div>
                         </div>
 
@@ -109,5 +135,11 @@ export default function Organizers() {
                 </div>
             </div>
         </section>
+        <AnimatePresence>
+            {isDemoModalOpen && (
+                <OrganizerDemoModal onClose={() => setIsDemoModalOpen(false)} />
+            )}
+        </AnimatePresence>
+        </>
     );
 }

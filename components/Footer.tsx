@@ -29,16 +29,7 @@ export default function Footer() {
                         </p>
                         <div className="flex items-center gap-2 text-xs text-white/55 font-inter mb-6">
                             <WhatsAppIcon className="w-4 h-4" width={16} height={16} />
-                            <span>Phase 1 launches on WhatsApp</span>
-                        </div>
-                        <div className="flex gap-4">
-                            {/* Social Icons (Placeholders) */}
-                            {['Instagram', 'Twitter/X', 'TikTok', 'LinkedIn'].map((social, i) => (
-                                <a key={i} href="#" className="w-9 h-9 rounded-lg cp-outline flex items-center justify-center text-white/60 transition-all">
-                                    <span className="sr-only">{social}</span>
-                                    <div className="w-4 h-4 bg-current rounded-sm" />
-                                </a>
-                            ))}
+                            <span>Launching on WhatsApp | Early March 2026</span>
                         </div>
                     </div>
 
@@ -59,9 +50,9 @@ export default function Footer() {
 
                         <div className="text-xs text-white/40 font-inter mb-2 uppercase tracking-wider">Legal</div>
                         <div className="flex flex-col gap-2 text-sm text-white/55 font-inter">
-                            <a href="mailto:hello@campuspulse.ng?subject=Privacy%20Policy%20Inquiry" className="hover:text-lavender transition-colors">Privacy Policy</a>
-                            <a href="mailto:hello@campuspulse.ng?subject=Terms%20of%20Service%20Inquiry" className="hover:text-lavender transition-colors">Terms of Service</a>
-                            <a href="mailto:hello@campuspulse.ng?subject=Press%20Kit%20Request" className="hover:text-lavender transition-colors">Press Kit</a>
+                            <a href="#" className="hover:text-lavender transition-colors">Privacy Policy</a>
+                            <a href="#" className="hover:text-lavender transition-colors">Terms of Service</a>
+                            <a href="#" className="hover:text-lavender transition-colors">Press Kit</a>
                         </div>
                     </div>
 
@@ -88,7 +79,7 @@ export default function Footer() {
                     <div>
                         <h4 className="text-white font-bold mb-4 font-display">Stay Updated</h4>
                         <p className="text-white/50 text-sm mb-4 font-inter">
-                            Launch dates, feature drops, and campus expansions.
+                            Launch dates, feature drops, and campus news.
                         </p>
                         <form 
                             onSubmit={(e) => {
@@ -114,7 +105,7 @@ export default function Footer() {
                                 type="submit"
                                 className="rounded-2xl bg-lavender text-night px-4 py-2 font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
                             >
-                                Notify me
+                                Request Beta Access
                                 <ArrowRight className="w-4 h-4" />
                             </button>
                         </form>
@@ -122,7 +113,7 @@ export default function Footer() {
                 </div>
 
                 <div className="pt-8 border-t border-lavender/10 text-center text-white/30 text-xs font-inter">
-                    &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> CampusPulse. All rights reserved.
+                    &copy; 2026 CampusPulse. All rights reserved.
                 </div>
             </div>
         </footer>

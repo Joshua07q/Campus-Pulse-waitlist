@@ -4,24 +4,24 @@ import { motion } from "framer-motion";
 
 const testimonials = [
     {
-        quote: "I used to miss so many events because I didn't know they existed. Now I just check my WhatsApp and I'm at everything. CampusPulse is a game-changer.",
+        quote: "I used to find out about the best events the next morning on people's stories. I just want to know what's happening before it happens.",
         author: "Adebayo M.",
         uni: "University of Ibadan, Nigeria",
     },
     {
-        quote: "I love how fast it is. I see events, RSVP, and get reminders without jumping between apps.",
+        quote: "Having one place for conferences and tech events on campus is crazy. No more missing opportunities because the flyer didn't reach my department.",
         author: "Chioma O.",
-        uni: "University of Lagos, Nigeria",
+        uni: "Computer Science, Year 3",
     },
     {
-        quote: "Finally found out about the startup pitch competition before it was too late. Won 2nd place. This app literally changed my semester.",
+        quote: "As a DJ, it's hard to build a real following. If people can actually see when I'm performing and pull up, that changes everything.",
         author: "Marcus T.",
-        uni: "Obafemi Awolowo University, Nigeria",
+        uni: "Campus DJ & Event Host",
     },
     {
-        quote: "Love that it shows me which events my friends are going to. Makes deciding so much easier.",
+        quote: "We spend more time promoting than planning. If CampusPulse helps the right people see our events, that's a game changer.",
         author: "Jordan K.",
-        uni: "Campus Beta Tester",
+        uni: "Student Union Events Lead",
     },
 ];
 

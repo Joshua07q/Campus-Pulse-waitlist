@@ -1,23 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { Rocket, MessageCircle, Smartphone } from "lucide-react";
-
-const phases = [
-    {
-        icon: MessageCircle,
-        title: "Phase 1 (March 2026): WhatsApp-first access",
-        description: "Discover events, RSVP, and get reminders all in your favorite messaging app.",
-        accent: "whatsapp",
-    },
-    {
-        icon: Smartphone,
-        title: "Phase 2 (Q2 2026): Full mobile app + AI features",
-        description: "Enhanced discovery, personalized recommendations, and more.",
-        accent: "lavender",
-    },
-];
+import WhatsAppIcon from "./WhatsAppIcon";
 
 export default function WhatsAppBanner() {
     return (
@@ -32,49 +16,24 @@ export default function WhatsAppBanner() {
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     viewport={{ once: true }}
                     transition={{ type: "spring", stiffness: 90, damping: 18, mass: 0.9 }}
-                    className="text-center max-w-4xl mx-auto"
+                    className="text-center max-w-2xl mx-auto"
                 >
                     <div className="flex items-center justify-center gap-3 mb-3">
-                        <Rocket className="w-5 h-5 text-lavender" />
-                        <span className="text-white font-bold uppercase tracking-wide text-sm">Launching in Phases</span>
-                        <Rocket className="w-5 h-5 text-lavender" />
+                        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-whatsapp border border-whatsapp/30 px-3 py-1 rounded-full">
+                            <WhatsAppIcon variant="glyph" className="w-3.5 h-3.5 text-whatsapp" width={14} height={14} />
+                            Launching on WhatsApp
+                        </span>
                     </div>
 
                     <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-                        WhatsApp-first, then everything else
+                        Launching on WhatsApp
                     </h2>
-
-                    <p className="text-lg text-white/70 font-inter mb-8 leading-relaxed">
-                        We are starting with the fastest way for students to get value: WhatsApp. A full mobile app and AI features follow next.
+                    <p className="text-white/65 font-inter mb-4">
+                        Access everything through your favorite messaging app
                     </p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                        {phases.map((p) => (
-                            <motion.div
-                                key={p.title}
-                                whileHover={{ y: -4 }}
-                                transition={{ type: "spring", stiffness: 140, damping: 18 }}
-                                className="p-7 rounded-xl cp-surface transition-colors"
-                            >
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div
-                                        className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                                            p.accent === "whatsapp" ? "bg-whatsapp/20" : "bg-purple/20"
-                                        }`}
-                                    >
-                                        <p.icon className={`w-5 h-5 ${p.accent === "whatsapp" ? "text-whatsapp" : "text-lavender"}`} />
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        {p.accent === "whatsapp" && (
-                                            <Image src="/whatsapp.png" alt="WhatsApp" width={18} height={18} />
-                                        )}
-                                        <div className="text-white font-bold font-inter">{p.title}</div>
-                                    </div>
-                                </div>
-                                <p className="text-white/65 text-sm font-inter leading-relaxed">{p.description}</p>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <p className="text-white/50 font-inter text-sm">
+                        Early March 2026 at University of Ibadan
+                    </p>
                 </motion.div>
             </div>
         </section>

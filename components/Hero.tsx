@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Loader2, ChevronDown, ChevronUp, X } from "lucide-react";
 import Logo from "./Logo";
-import WhatsAppIcon from "./WhatsAppIcon";
 import { animate } from "animejs";
 import confetti from 'canvas-confetti';
 import gsap from 'gsap';
@@ -62,12 +61,6 @@ const flattenLottieVerticalMotion = (lottieData: any) => {
 
 export default function Hero() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const whatsappNumber = "2340000000000"; // TODO: replace with live bot number
-    const whatsappMessage = "Hi CampusPulse";
-    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-    // Keep this SSR-stable to avoid hydration mismatch; we can still open WhatsApp Web on click for desktop.
-    const whatsappHref = whatsappLink;
 
     const Lottie = require("lottie-react").default;
     const ChatBubble = require("./ChatBubble").default;
@@ -314,26 +307,20 @@ export default function Hero() {
     return (
         <section className="relative w-full min-h-screen flex items-center justify-center bg-night overflow-hidden">
             {/* Navbar / Logo Area */}
-            <div className="absolute top-0 left-0 w-full z-50 p-6 flex justify-between items-center pointer-events-none">
-                <div className="flex items-center gap-3">
-                    <Logo className="w-10 h-10 text-white" />
-                    <span className="font-display text-xl text-white tracking-wide">CampusPulse</span>
+            <div className="absolute top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 sm:py-6 flex justify-between items-center pointer-events-none">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0 pr-2">
+                    <Logo className="w-8 h-8 sm:w-10 sm:h-10 text-white shrink-0" />
+                    <span className="font-display text-base sm:text-xl text-white tracking-wide truncate">CampusPulse</span>
                 </div>
             </div>
 
-            {/* Floating WhatsApp Icon (icon-only CTA) */}
-            <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute top-6 right-6 z-50 pointer-events-auto"
-                aria-label="Message CampusPulse on WhatsApp"
-                title="Message on WhatsApp"
+            {/* Request Beta Access CTA */}
+            <button
+                onClick={() => setIsModalOpen(true)}
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 pointer-events-auto px-4 py-2 rounded-lg bg-gradient-to-r from-purple to-lavender text-night font-bold text-sm hover:opacity-90 transition-all"
             >
-                <span className="inline-flex w-14 h-14 rounded-[1.15rem] border-2 border-black/70 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.6)] overflow-hidden hover:scale-[1.03] active:scale-[0.99] transition-transform">
-                    <WhatsAppIcon className="w-full h-full" width={56} height={56} />
-                </span>
-            </a>
+                Request Beta Access
+            </button>
 
             {/* Background with Purple Night Glow */}
             <div className="absolute inset-0 z-0">
@@ -365,10 +352,9 @@ export default function Hero() {
                 >
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-transparent bg-clip-text bg-gradient-to-r from-white via-lavender to-white drop-shadow-neon leading-tight">
                         Never Miss the Vibe.
-                        <span className="block">All in Your WhatsApp.</span>
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-lavender/80 font-inter max-w-2xl mx-auto">
-                        Discover every event right in your WhatsApp. See who&apos;s going, RSVP in seconds, and experience campus life like never before.
+                        Imagine Instagram meets Eventbrite. Discover what's happening, see who's going, and pull up at the right time.
                     </p>
                 </motion.div>
 
@@ -385,7 +371,7 @@ export default function Hero() {
                             onClick={() => setIsModalOpen(true)}
                             className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple to-lavender hover:opacity-90 text-night font-bold text-lg shadow-[0_0_20px_rgba(100,24,189,0.5)] hover:shadow-[0_0_30px_rgba(227,176,255,0.6)] transition-all flex items-center gap-3 group"
                         >
-                            Join the Waitlist
+                            Request Beta Access
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
 
@@ -407,7 +393,7 @@ export default function Hero() {
                             Access everything through your favorite messaging app
                         </div>
                         <p className="text-white/55 text-sm font-inter cp-outline px-4 py-2 rounded-lg backdrop-blur-md">
-                            Launching March 2026 at University of Ibadan | Coming soon to your campus
+                            Launching on WhatsApp | Early March 2026
                         </p>
                     </div>
                 </motion.div>
@@ -553,22 +539,65 @@ function WaitlistModal({ onClose }: { onClose: () => void }) {
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [showOptional, setShowOptional] = useState(false);
+    const [error, setError] = useState("");
+
+    const eventInterests = [
+        "Parties",
+        "Concerts",
+        "Academic",
+        "Sports",
+        "Shows",
+        "Career",
+        "Workshops",
+    ];
+
+    const discoveryMethods = [
+        "WhatsApp groups",
+        "Instagram pages",
+        "Friends/word of mouth",
+        "Flyers/posters",
+        "Twitter/X",
+        "Telegram/Discord",
+    ];
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
+        setError("");
 
         const formData = new FormData(e.currentTarget);
+        const selectedEventInterests = formData.getAll("eventInterests").map(String);
+        const selectedDiscoveryMethods = formData.getAll("discoveryMethods").map(String);
+
         const data = {
+            formType: "student_beta",
             name: formData.get("name"),
-            email: formData.get("email"),
-            university: formData.get("university"),
-            year: formData.get("year"),
-            reason: formData.get("reason"),
             phone: formData.get("phone"),
-            source: formData.get("source"),
-            role: formData.get("role"),
+            email: formData.get("email"),
+            yearLevel: formData.get("yearLevel"),
+            department: formData.get("department"),
+            eventInterests: selectedEventInterests,
+            discoveryMethods: selectedDiscoveryMethods,
+            frustration: formData.get("frustration"),
+            friendFeature: formData.get("friendFeature"),
+            npsScore: formData.get("npsScore"),
+            referralSource: formData.get("referralSource"),
+            referredBy: formData.get("referredBy"),
+            featureRequests: formData.get("featureRequests"),
+            earlyTesterInterest: formData.get("earlyTesterInterest"),
         };
+
+        if (selectedEventInterests.length === 0) {
+            setError("Please choose at least one event interest.");
+            setLoading(false);
+            return;
+        }
+
+        if (selectedDiscoveryMethods.length === 0) {
+            setError("Please choose at least one current discovery method.");
+            setLoading(false);
+            return;
+        }
 
         try {
             const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxbx763RS7VILJVp-4Zz1CoY_u_rFv3eF6n948wO6tcfNKNOp6ZkttZjaK9uRrggZ1U9w/exec";
@@ -635,15 +664,15 @@ function WaitlistModal({ onClose }: { onClose: () => void }) {
 
                 {!submitted ? (
                     <>
-                        <h2 className="text-3xl font-display text-white mb-2">Join the Waitlist</h2>
-                        <p className="text-white/60 font-inter mb-6">Get early access when CampusPulse launches.</p>
+                        <h2 className="text-3xl font-display text-white mb-2">Request Beta Access</h2>
+                        <p className="text-white/60 font-inter mb-6">Join 500+ UI students first in line.</p>
 
-                        <form onSubmit={handleSubmit} className="space-y-4 text-left">
+                        <form onSubmit={handleSubmit} className="space-y-5 text-left">
                             {/* Mandatory Fields */}
-                            <div className="space-y-4">
+                            <div className="grid md:grid-cols-2 gap-4">
                                 <input name="name" type="text" placeholder="Full Name *" required className="input-field" />
+                                <input name="phone" type="tel" placeholder="WhatsApp Phone Number *" required className="input-field" />
                                 <input name="email" type="email" placeholder="University Email *" required className="input-field" />
-                                <input name="university" type="text" placeholder="University *" required className="input-field" />
                             </div>
 
                             {/* Optional Fields Toggle */}
@@ -662,18 +691,81 @@ function WaitlistModal({ onClose }: { onClose: () => void }) {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        className="space-y-3 overflow-hidden"
+                                        className="space-y-4 overflow-hidden"
                                     >
                                         <div className="grid grid-cols-2 gap-3">
-                                            <input name="year" type="text" placeholder="Year" className="input-field" />
-                                            <input name="role" type="text" placeholder="Role (e.g. Student)" className="input-field" />
+                                            <input name="yearLevel" type="text" placeholder="Year/Level" className="input-field" />
+                                            <input name="department" type="text" placeholder="Department/Faculty" className="input-field" />
                                         </div>
-                                        <input name="phone" type="tel" placeholder="Phone Number" className="input-field" />
-                                        <input name="source" type="text" placeholder="How did you hear about us?" className="input-field" />
-                                        <textarea name="reason" placeholder="Why are you joining?" rows={2} className="input-field resize-none" />
+
+                                        <FieldCheckboxGroup
+                                            label="Event Interests *"
+                                            name="eventInterests"
+                                            options={eventInterests}
+                                        />
+
+                                        <FieldCheckboxGroup
+                                            label="How do you currently discover events? *"
+                                            name="discoveryMethods"
+                                            options={discoveryMethods}
+                                        />
+
+                                        <textarea
+                                            name="frustration"
+                                            placeholder="Biggest frustration with finding campus events"
+                                            rows={2}
+                                            className="input-field resize-none"
+                                        />
+
+                                        <div className="space-y-2 rounded-lg border border-lavender/20 bg-night/40 p-3">
+                                            <p className="text-sm text-white/75 font-semibold">
+                                                Would you use a feature that shows which friends are going?
+                                            </p>
+                                            {["Yes", "Maybe", "No", "Not Sure"].map((option) => (
+                                                <label key={option} className="flex items-center gap-2 text-sm text-white/80">
+                                                    <input type="radio" name="friendFeature" value={option} />
+                                                    <span>{option}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            <select name="npsScore" className="input-field">
+                                                <option value="">NPS Score (0-10)</option>
+                                                {Array.from({ length: 11 }, (_, i) => (
+                                                    <option key={i} value={String(i)}>{i}</option>
+                                                ))}
+                                            </select>
+                                            <input name="referralSource" type="text" placeholder="Referral Source" className="input-field" />
+                                        </div>
+
+                                        <input
+                                            name="referredBy"
+                                            type="text"
+                                            placeholder="Referred By (name/phone)"
+                                            className="input-field"
+                                        />
+                                        <textarea
+                                            name="featureRequests"
+                                            placeholder="Feature requests"
+                                            rows={2}
+                                            className="input-field resize-none"
+                                        />
+
+                                        <div className="space-y-2 rounded-lg border border-lavender/20 bg-night/40 p-3">
+                                            <p className="text-sm text-white/75 font-semibold">Are you interested in early testing?</p>
+                                            {["Yes", "Maybe", "No"].map((option) => (
+                                                <label key={option} className="flex items-center gap-2 text-sm text-white/80">
+                                                    <input type="radio" name="earlyTesterInterest" value={option} />
+                                                    <span>{option}</span>
+                                                </label>
+                                            ))}
+                                        </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
+
+                            {error && <p className="text-red-300 text-sm">{error}</p>}
 
                             <button
                                 type="submit"
@@ -682,7 +774,7 @@ function WaitlistModal({ onClose }: { onClose: () => void }) {
                             >
                                 {loading ? <Loader2 className="animate-spin" /> : (
                                     <>
-                                        Join the Waitlist
+                                        Request Beta Access
                                         <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                                     </>
                                 )}
@@ -695,6 +787,22 @@ function WaitlistModal({ onClose }: { onClose: () => void }) {
             </motion.div>
         </div>
     )
+}
+
+function FieldCheckboxGroup({ label, name, options }: { label: string; name: string; options: string[] }) {
+    return (
+        <div className="space-y-2 rounded-lg border border-lavender/20 bg-night/40 p-3">
+            <p className="text-sm text-white/75 font-semibold">{label}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {options.map((option) => (
+                    <label key={option} className="flex items-center gap-2 text-sm text-white/80">
+                        <input type="checkbox" name={name} value={option} />
+                        <span>{option}</span>
+                    </label>
+                ))}
+            </div>
+        </div>
+    );
 }
 
 function SuccessView({ onClose }: { onClose: () => void }) {
@@ -786,21 +894,30 @@ function SuccessView({ onClose }: { onClose: () => void }) {
             </div>
 
             <h3 className="success-item text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-500 mb-4">
-                You&apos;re In!
+                You're early. We'll let you in first.
             </h3>
 
             <p className="success-item text-white/80 text-lg mb-8 max-w-sm mx-auto leading-relaxed">
-                Welcome to the future of campus life. We&apos;ve reserved your spot on the exclusive list.
+                Check your email for confirmation. We'll message you on WhatsApp when CampusPulse goes live in Early March.
             </p>
 
-            <button
-                onClick={onClose}
-                className="success-item group relative px-8 py-3 rounded-lg cp-outline text-white transition-all overflow-hidden"
-            >
-                <span className="relative z-10 font-medium">Close</span>
-                {/* Hover shine effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
-            </button>
+            <div className="success-item flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                    href={`https://wa.me/?text=${encodeURIComponent("I just got early access to CampusPulse — the new way to discover campus events at UI. Request yours before the March launch: https://campuspulse.ng\n\nGet your friends on board and move up the waitlist!")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative px-8 py-3 rounded-lg bg-whatsapp/90 text-white font-bold transition-all overflow-hidden flex items-center justify-center gap-2"
+                >
+                    Share on WhatsApp
+                </a>
+                <button
+                    onClick={onClose}
+                    className="group relative px-8 py-3 rounded-lg cp-outline text-white transition-all overflow-hidden"
+                >
+                    <span className="relative z-10 font-medium">Close</span>
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
+                </button>
+            </div>
         </div>
     );
 }

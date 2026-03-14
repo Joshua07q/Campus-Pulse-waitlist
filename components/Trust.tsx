@@ -12,12 +12,12 @@ const features = [
     {
         icon: Lock,
         title: "Verified Attendance",
-        description: "Get cryptographically verified proofs of attendance. Your participation is trustworthy and portable. (Paid events coming Q3 2026)"
+        description: "Get verified proofs of attendance. Your participation is trustworthy and portable. (Paid events coming Q3 2026)"
     },
     {
         icon: EyeOff,
         title: "Privacy Protected",
-        description: "Your data stays private. We follow strict data protection standards and never sell your information."
+        description: "Your data stays private. We follow strict data protection standards."
     },
     {
         icon: Flag,

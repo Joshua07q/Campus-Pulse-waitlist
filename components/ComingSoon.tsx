@@ -9,21 +9,21 @@ const items = [
         title: "Spark Groups",
         date: "Q3 2026",
         description:
-            "Auto WhatsApp groups for attendees. Build the hype, coordinate plans, make friends - all before the event.",
-    },
-    {
-        icon: Sparkles,
-        title: "AI Recommendations",
-        date: "Q2 2026",
-        description:
-            "Smart suggestions based on your interests, past events, and what friends are attending.",
+            "Auto WhatsApp groups for attendees. Build the hype, coordinate plans, make friends — all before the event.",
     },
     {
         icon: Ticket,
         title: "Paid Events",
-        date: "Q3 2026",
+        date: "May 2026",
         description:
             "Secure ticketing for premium events with fraud-proof verification.",
+    },
+    {
+        icon: Sparkles,
+        title: "AI Recommendations",
+        date: "June 2026",
+        description:
+            "Smart suggestions based on your interests, past events, and what friends are attending.",
     },
     {
         icon: Calendar,
@@ -47,7 +47,7 @@ export default function ComingSoon() {
                 >
                     <h2 className="text-3xl md:text-4xl font-display text-white mb-3">Coming Soon</h2>
                     <p className="text-white/60 font-inter max-w-2xl mx-auto">
-                        We are constantly improving. Next up:
+                        We're constantly improving. Next up:
                     </p>
                 </motion.div>
 
@@ -74,9 +74,9 @@ export default function ComingSoon() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="text-xs font-bold tracking-wider uppercase text-lavender/80 whitespace-nowrap">
+                                <span className="inline-block px-2.5 py-0.5 rounded-full text-[0.7rem] font-bold tracking-wider uppercase whitespace-nowrap bg-[rgba(156,163,175,0.15)] text-[#9CA3AF] border border-[rgba(156,163,175,0.25)]">
                                     {item.date}
-                                </div>
+                                </span>
                             </div>
                         </motion.div>
                     ))}

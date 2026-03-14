@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
@@ -8,52 +8,42 @@ const faqs = [
   {
     question: "Do I need to download an app?",
     answer:
-      "Not for Phase 1. You can access everything through WhatsApp. A full mobile app launches in Q2 2026, but WhatsApp will always be supported.",
+      "No. CampusPulse launches on WhatsApp in Early March 2026. Just message our WhatsApp number and you're in. A full mobile app is coming later.",
   },
   {
     question: "Why WhatsApp?",
     answer:
-      "WhatsApp is where Nigerian students already are. It is fast, works on low data, and requires no app download. We are meeting you where you are.",
+      "Most UI students already use WhatsApp daily. We're meeting you where you are — no new app to download, no new logins to remember.",
   },
   {
     question: "What is available at launch vs later?",
     answer:
-      "March 2026 (Launch): Event discovery, RSVP, reminders, check-in codes, verified proofs - all via WhatsApp. Q2-Q4 2026: AI recommendations, Spark Groups, paid events, Pulse Wrapped.",
+      "At Launch (March 2026): Discover events, RSVP, get reminders, check in with QR codes, earn verified attendance proofs — all in WhatsApp. Coming Later: Spark Groups (auto WhatsApp groups for events), AI recommendations, paid event ticketing, Pulse Wrapped year-end recap.",
   },
   {
     question: "When will CampusPulse launch at my university?",
     answer:
-      "We start at the University of Ibadan in March 2026, then expand to more Nigerian campuses. Join the waitlist and request your school to increase priority.",
+      "We're starting at University of Ibadan in Early March 2026. If you want CampusPulse at your campus, request it and we'll prioritize based on demand.",
   },
   {
     question: "How do you verify I am a student?",
     answer:
-      "We send a verification link to your university email address. No university email, no access.",
+      "You'll verify your university email address during signup. This ensures only real students can join your campus network.",
   },
   {
     question: "Is CampusPulse free?",
     answer:
-      "Yes. Phase 1 is free for students. Paid events and ticketing are coming later (starting Q3 2026).",
+      "Yes! Discovering events, RSVPing, and earning attendance proofs are completely free. Premium features (like paid event ticketing) may be introduced later.",
   },
   {
-    question: "What are verified attendance proofs?",
+    question: "Why should I trust CampusPulse with my data?",
     answer:
-      "After check-in, you can get a cryptographically verified proof of attendance that you can keep or share.",
+      "We follow strict data protection standards and only collect what's necessary. Your data stays private and is never shared without your permission. Plus, CampusPulse is built by students, for students — we understand campus privacy concerns.",
   },
   {
-    question: "How do Spark Groups work?",
+    question: "What if my friends aren't on CampusPulse yet?",
     answer:
-      "Spark Groups (Q3 2026) can create WhatsApp groups for event attendees so you can coordinate before the event. Groups auto-close after the event.",
-  },
-  {
-    question: "Do you support paid events?",
-    answer:
-      "Not in Phase 1. Paid events and secure ticketing are planned for Q3 2026.",
-  },
-  {
-    question: "What makes CampusPulse different from WhatsApp groups or Instagram?",
-    answer:
-      "Groups and IG scatter event info across chats and pages. CampusPulse organizes discovery and friend visibility, then uses WhatsApp for RSVP and reminders.",
+      "Get your friends on board and move up the waitlist! The more friends you invite, the better your CampusPulse experience. Events are better when your crew is there.",
   },
 ];
 

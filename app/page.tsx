@@ -1,8 +1,9 @@
 import Hero from "@/components/Hero";
+import Countdown from "@/components/Countdown";
+import HowItWorks from "@/components/HowItWorks";
 import WhatsAppBanner from "@/components/WhatsAppBanner";
 import Features from "@/components/Features";
 import ComingSoon from "@/components/ComingSoon";
-import HowItWorks from "@/components/HowItWorks";
 import Categories from "@/components/Categories";
 import Testimonials from "@/components/Testimonials";
 import Organizers from "@/components/Organizers";
@@ -16,10 +17,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-night text-white overflow-hidden font-sans">
       <Hero />
+      <Countdown />
+      <HowItWorks />
       <WhatsAppBanner />
       <Features />
       <ComingSoon />
-      <HowItWorks />
       <Categories />
       <Testimonials />
       <Organizers />

@@ -19,7 +19,7 @@ const features = [
     {
         icon: MessageCircle,
         title: "RSVP in Seconds",
-        subtitle: "All in WhatsApp",
+        subtitle: "All in One Place",
         description: "RSVP with one tap and get reminders right in WhatsApp. Check-in codes and verified attendance proofs included.",
     },
     {
@@ -58,7 +58,7 @@ export default function Features() {
                 >
                     <h2 className="text-4xl md:text-5xl font-display text-white mb-4">Why Students Love CampusPulse</h2>
                     <p className="text-xl text-white/60 max-w-2xl mx-auto font-inter">
-                        Everything you need to experience campus life to the fullest.
+                        Imagine Instagram meets Eventbrite.
                     </p>
                 </motion.div>
 
